@@ -16,8 +16,11 @@ def all_odd(numbers):
         >>> all_odd([2, -6, 8])
         []
     """
-
-    return ['the wrong thing']
+    odd_numbers = []
+    for num in numbers:
+        if num % 2 != 0:
+            odd_numbers.append(num)
+    return odd_numbers
 
 
 def print_indices(items):
@@ -45,8 +48,8 @@ def print_indices(items):
         3 Volvo
     
     """
-
-    print "Nothing at all"
+    for index, item_name in enumerate(items):
+        print index, item_name
 
 
 def foods_in_common(foods1, foods2):
@@ -76,9 +79,9 @@ def foods_in_common(foods1, foods2):
         []
 
     """
-
-    return ['the wrong thing']
-
+    common_items = list(set(foods1) & set(foods2))
+    common_items_alpha = sorted(common_items)
+    return common_items_alpha
 
 def every_other_item(items):
     """Return every other item in `items`, starting at first item.
@@ -94,7 +97,11 @@ def every_other_item(items):
        ['you', 'are', 'good', 'at', 'code']
     """
 
-    return ['the wrong thing']
+    # first if statement is to cover an edge case
+    if len(items) < 2:
+        print "List must contain more than two items"
+    every_other = items[0::2]
+    return every_other
 
 
 def largest_n_items(items, n):
@@ -118,8 +125,18 @@ def largest_n_items(items, n):
         >>> largest_n_items([3, 3, 3, 2, 1], 2)
         [3, 3]
     """
+    items_in_descending_order = sorted(items, reverse = True)
+    
+    # first if statement is to cover an edge case
+    if n < 0:
+        print "Please enter a positive integer for the length"
+    if n ==0:
+        return []
+    result_descending = items_in_descending_order[:n]
 
-    return []
+    result = result_descending[::-1]
+    return result
+
 
 
 #####################################################################
