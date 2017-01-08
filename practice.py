@@ -37,15 +37,19 @@ def long_words(words):
         >>> long_words(["all", "are", "tiny"])
         []
     """
-    result = []   
+    # result = []   
+    # for word in words:
+    #     if len(word) <= 4:
+    #         return []
+    #     else:
+    #         result.append(word)
+    # return result
+
+    result = []
     for word in words:
-        if len(word) >4:
+        if len(word) > 4:
             result.append(word)
-        else:
-            return []
-
     return result
-
 
 
 
@@ -91,13 +95,12 @@ def smallest_int(numbers):
         >>> smallest_int([]) is None
         True
     """
-    if numbers == []:
-        return True
-    else: 
-        numbers_sorted = sorted(numbers)
-    return numbers_sorted[0]
-    
 
+    numbers_sorted = sorted(numbers)
+    if numbers_sorted != []:
+        return numbers_sorted[0]
+
+# I don't really understand the part above about the emtpy list returning None.
 
 def largest_int(numbers):
     """Find the largest integer in a list of integers and return it.
@@ -117,8 +120,10 @@ def largest_int(numbers):
         >>> largest_int([]) is None
         True
     """
+    
     descending_numbers = sorted(numbers, reverse = True)
-    return descending_numbers[0]
+    if descending_numbers != []:
+        return descending_numbers[0]
 
 
 def halvesies(numbers):
@@ -273,11 +278,13 @@ def join_strings_with_comma(words):
         'Pretzel'
     """
     result = ''
-    for word in words:
-        result += word
-        # print word
-        # print result
-    return result
+    if len(words) == 1:
+        for word in words:
+            return word
+    else:    
+        for word in words[:-1]:
+            result += word + ", " 
+    return result + words[-1]
 
 
 def reverse_list(items):
@@ -329,10 +336,29 @@ def reverse_list_in_place(items):
         >>> orig
         ['I', 'love', 'cookies']
     """
-    for item in items:
-        items = items[::-1]
-
+    reversed_list = []
+    for item in items[::-1]:
+        reversed_list.append(item)
+    items[:] = reversed_list  
     return items
+
+# I don't understand why the code above doesn't work for two of the tests:
+# **********************************************************************
+# File "practice.py", line 330, in __main__.reverse_list_in_place
+# Failed example:
+#     reverse_list_in_place(orig)
+# Expected nothing
+# Got:
+#     [3, 2, 1]
+# **********************************************************************
+# File "practice.py", line 335, in __main__.reverse_list_in_place
+# Failed example:
+#     reverse_list_in_place(orig)
+# Expected nothing
+# Got:
+#     ['I', 'love', 'cookies']
+# **********************************************************************
+
 
 
 def duplicates(items):
@@ -394,8 +420,13 @@ def find_letter_indices(words, letter):
     ("o" does not appear in "jumps", so the result for that input is
     `None`.)
     """
-
-    return []
+    
+    for word in words:
+        for letter in word:
+            letter_index = []
+            for index, letter in enumerate(word):
+                letter_index.append(index)
+    return letter_index
 
 #####################################################################
 # END OF PRACTICE: You can ignore everything below.
